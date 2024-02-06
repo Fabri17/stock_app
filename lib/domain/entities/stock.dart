@@ -1,10 +1,12 @@
-class Stock {
+import 'package:equatable/equatable.dart';
+
+class Stock extends Equatable {
   final String name;
   final String symbol;
   final double price;
   final double volume;
 
-  Stock({
+  const Stock({
     required this.name,
     required this.symbol,
     required this.price,
@@ -33,4 +35,7 @@ class Stock {
       volume: json['change'],
     );
   }
+
+  @override
+  List<Object?> get props => [name, symbol, price, volume];
 }

@@ -31,6 +31,11 @@ class _StockWatchListState extends State<StockWatchList> {
                 style: Styles.paragraphTwo(),
               ),
             ),
+            const SizedBox(width: 8),
+            const Icon(
+              Icons.add,
+              size: 16,
+            ),
           ],
         ),
         const SizedBox(height: 16),
