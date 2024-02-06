@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'core/constants/colors.dart';
+
+import 'config/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,17 +10,19 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Stock App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.primary),
         useMaterial3: true,
       ),
-      home: Container(),
+      routerDelegate: goRouter.router.routerDelegate,
+      routeInformationParser: goRouter.router.routeInformationParser,
+      routeInformationProvider: goRouter.router.routeInformationProvider,
+      builder: (_, child) => child!,
     );
   }
 }
