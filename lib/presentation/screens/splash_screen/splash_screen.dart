@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Center(
           child: Text(
             "Stock App",
-            style: Styles.heading4(color: CustomColors.white),
+            style: Styles.heading4(),
           ),
         ),
       ),

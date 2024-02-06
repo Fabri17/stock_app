@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
-import 'core/constants/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_app/config/theme/app_theme.dart';
 
-import 'config/router.dart';
+import 'config/router/router.dart';
+import 'presentation/blocs/blocs.dart';
+import 'presentation/blocs/service_locator.dart';
 
 void main() {
-  runApp(const MyApp());
+  serviceLocatorInit();
+  runApp(const BlocsProviders());
+}
+
+class BlocsProviders extends StatelessWidget {
+  const BlocsProviders({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<ThemeCubit>()),
+      ],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -12,13 +30,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.watch<ThemeCubit>().state;
+
     return MaterialApp.router(
       title: 'Stock App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.primary),
-        useMaterial3: true,
-      ),
+      theme: AppTheme(isDarkmode: theme.isDarkMode).getTheme(),
       routerDelegate: goRouter.router.routerDelegate,
       routeInformationParser: goRouter.router.routeInformationParser,
       routeInformationProvider: goRouter.router.routeInformationProvider,

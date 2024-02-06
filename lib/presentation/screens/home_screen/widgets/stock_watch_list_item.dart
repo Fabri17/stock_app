@@ -40,10 +40,7 @@ class StockWatchListItem extends StatelessWidget {
               ),
               Text(
                 Formatters.percentage(stock.volume),
-                style: Styles.paragraphTwo(
-                  color:
-                      stock.volume > 0 ? CustomColors.green : CustomColors.red,
-                ),
+                style: Styles.paragraphTwo(),
               ),
             ],
           ),

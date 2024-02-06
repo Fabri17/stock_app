@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/styles.dart';
 
 import 'stock_watch_list_empty_view.dart';
@@ -25,13 +24,11 @@ class _StockWatchListState extends State<StockWatchList> {
               style: Styles.heading6(),
             ),
             const Spacer(),
-            TextButton(
-              onPressed: () => context.push('/add-alert'),
+            InkWell(
+              onTap: () => context.push('/add-alert'),
               child: Text(
                 "Add Alert",
-                style: Styles.paragraphTwo(
-                  color: CustomColors.primary,
-                ),
+                style: Styles.paragraphTwo(),
               ),
             ),
           ],

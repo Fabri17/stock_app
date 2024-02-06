@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/styles.dart';
+import '../../../blocs/blocs.dart';
 
 class StockWatchListEmptyView extends StatelessWidget {
   const StockWatchListEmptyView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<ThemeCubit>().state;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -19,7 +22,9 @@ class StockWatchListEmptyView extends StatelessWidget {
           Icon(
             Icons.insert_chart_outlined,
             size: 48,
-            color: CustomColors.black500.withOpacity(0.6),
+            color: themeCubit.isDarkMode
+                ? CustomColors.primary.withAlpha(300)
+                : CustomColors.black500,
           ),
           const SizedBox(height: 8),
           Text(
@@ -30,9 +35,7 @@ class StockWatchListEmptyView extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             "Add a stock to your watchlist to see it here.",
-            style: Styles.paragraphTwo(
-              color: CustomColors.black500.withOpacity(0.6),
-            ),
+            style: Styles.paragraphTwo(),
             textAlign: TextAlign.center,
           ),
         ],

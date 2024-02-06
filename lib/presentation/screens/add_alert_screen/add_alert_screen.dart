@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants/colors.dart';
 import '../../../core/constants/styles.dart';
-import '../../widgets/custom_button.dart';
 
 import '../../widgets/text_input.dart';
 
@@ -35,14 +33,18 @@ class _AddAlertScreenState extends State<AddAlertScreen> {
             const SizedBox(height: 8),
             Text(
               "Price Alert is the price at which you want to be notified.",
-              style: Styles.captionOne(
-                color: CustomColors.black500,
-              ),
+              style: Styles.captionOne(),
             ),
             const Spacer(),
-            CustomButton(
-              text: "Add Alert",
-              onTap: () {},
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Add Alert",
+                  style: Styles.subtitleTwo(),
+                ),
+              ),
             ),
             const SizedBox(height: 16),
           ],

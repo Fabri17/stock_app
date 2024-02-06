@@ -27,8 +27,8 @@ class TextInput extends StatelessWidget {
           ),
         ),
         labelText: labelText,
-        labelStyle: Styles.paragraphOne(color: CustomColors.black500),
-        floatingLabelStyle: Styles.paragraphTwo(color: CustomColors.primary),
+        labelStyle: Styles.paragraphOne(),
+        floatingLabelStyle: Styles.paragraphTwo(),
       ),
       keyboardType: keyboardType,
     );
