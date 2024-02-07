@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/styles.dart';
-import '../../../../domain/entities/stock.dart';
+import '../../../../data/models/stock.dart';
 
 import '../../../../core/utils/utils.dart';
 
@@ -26,25 +26,7 @@ class StockWatchListItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            Formatters.symbol(stock.symbol),
-            style: Styles.paragraphOne(),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                Formatters.currency(stock.price),
-                style: Styles.subtitleTwo(),
-              ),
-              Text(
-                Formatters.percentage(stock.volume),
-                style: Styles.paragraphTwo(),
-              ),
-            ],
-          ),
-        ],
+        children: [],
       ),
     );
   }

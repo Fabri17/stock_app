@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/styles.dart';
 
 import '../../widgets/text_input.dart';
+import 'widgets/add_alert_widgets.dart';
 
 class AddAlertScreen extends StatefulWidget {
   const AddAlertScreen({super.key});
@@ -25,6 +26,7 @@ class _AddAlertScreenState extends State<AddAlertScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const StocksDropdownWidget(),
             const SizedBox(height: 16),
             const TextInput(
               labelText: "Price Alert",

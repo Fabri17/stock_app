@@ -28,7 +28,7 @@ class StockWatchListEmptyView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "You don't have any stocks yet",
+            "You don't have any track stocks yet",
             style: Styles.subtitleTwo(),
             textAlign: TextAlign.center,
           ),
