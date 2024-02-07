@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_app/domain/repositories/alert_repository.dart';
 
 import '../../../domain/entities/entities.dart';
 
@@ -9,14 +10,11 @@ part 'alert_event.dart';
 part 'alert_state.dart';
 
 class AlertBloc extends Bloc<AlertEvent, AlertState> {
-  final Future<void> Function(Alert alert) _saveAlert;
-  final Future<List<Alert>> Function() _getAlerts;
+  final AlertRepository _alertRepository;
 
   AlertBloc({
-    required Future<void> Function(Alert alert) saveAlert,
-    required Future<List<Alert>> Function() getAlerts,
-  })  : _saveAlert = saveAlert,
-        _getAlerts = getAlerts,
+    required AlertRepository alertRepository,
+  })  : _alertRepository = alertRepository,
         super(const AlertState()) {
     on<AddAlertEvent>(_onAddAlertHandler);
     on<AlertsRequested>(_onAlertsRequestedHandler);
@@ -24,7 +22,7 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
 
   Future<void> addAlert(Alert alert) async {
     try {
-      await _saveAlert(alert);
+      await _alertRepository.saveAlert(alert);
       add(AddAlertEvent(alert));
     } on Exception catch (e) {
       throw Exception("Failed to save alert: $e");
@@ -33,7 +31,7 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
 
   Future<List<Alert>> getAlerts() async {
     try {
-      final alerts = await _getAlerts();
+      final alerts = await _alertRepository.getAlerts();
       add(AlertsRequested(alerts: alerts));
 
       return alerts;

@@ -15,10 +15,5 @@ void serviceLocatorInit() {
     ),
   );
 
-  getIt.registerSingleton(
-    AlertBloc(
-      saveAlert: (alert) => AlertRepository().saveAlert(alert),
-      getAlerts: () => AlertRepository().getAlerts(),
-    ),
-  );
+  getIt.registerSingleton(AlertBloc(alertRepository: AlertRepository()));
 }
