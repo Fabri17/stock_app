@@ -10,11 +10,11 @@ part 'alert_state.dart';
 
 class AlertBloc extends Bloc<AlertEvent, AlertState> {
   final Future<void> Function(Alert alert) _saveAlert;
-  final Future<void> Function() _getAlerts;
+  final Future<List<Alert>> Function() _getAlerts;
 
   AlertBloc({
     required Future<void> Function(Alert alert) saveAlert,
-    required Future<void> Function() getAlerts,
+    required Future<List<Alert>> Function() getAlerts,
   })  : _saveAlert = saveAlert,
         _getAlerts = getAlerts,
         super(const AlertState()) {
@@ -24,6 +24,7 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
 
   Future<void> addAlert(Alert alert) async {
     try {
+      await _saveAlert(alert);
       add(AddAlertEvent(alert));
     } on Exception catch (e) {
       throw Exception("Failed to save alert: $e");
@@ -32,8 +33,10 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
 
   Future<List<Alert>> getAlerts() async {
     try {
-      add(AlertsRequested(alerts: state.alerts));
-      return state.alerts;
+      final alerts = await _getAlerts();
+      add(AlertsRequested(alerts: alerts));
+
+      return alerts;
     } on Exception catch (e) {
       throw Exception("Failed to get alerts: $e");
     }

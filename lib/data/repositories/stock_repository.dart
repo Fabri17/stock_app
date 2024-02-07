@@ -12,7 +12,11 @@ class StockRepository {
     try {
       var response = await dio.get(
         '$_baseUrl/stock/symbol',
-        queryParameters: {'exchange': exchange, 'token': _apiKey},
+        queryParameters: {
+          'exchange': exchange,
+          'mic': 'XNAS',
+          'token': _apiKey,
+        },
       );
 
       if (response.statusCode == 200) {

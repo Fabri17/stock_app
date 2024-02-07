@@ -19,7 +19,7 @@ class Alert extends Equatable {
     );
   }
 
-  toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'stockSymbol': stockSymbol,
       'alertPrice': alertPrice,

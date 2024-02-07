@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/constants/styles.dart';
 import '../../../../data/models/stock.dart';
-
-import '../../../../core/utils/utils.dart';
 
 class StockWatchListItem extends StatelessWidget {
   const StockWatchListItem({super.key, required this.stock});
@@ -23,7 +20,7 @@ class StockWatchListItem extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [],
