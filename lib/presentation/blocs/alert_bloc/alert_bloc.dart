@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/repositories/alert_repository.dart';
 import '../../../domain/services/i_web_socket_service.dart';
@@ -78,12 +77,10 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
 
     // Suscribir a los símbolos de las alertas existentes
     for (final alert in state.alerts) {
-      debugPrint('Subscribing to ${alert.stockSymbol}');
       _webSocketService.subscribeToStock(alert.stockSymbol);
     }
 
     _webSocketService.messages.listen((message) {
-      debugPrint("Received message: $message");
       final data = json.decode(message);
       if (data['type'] == 'trade') {
         final trades = data['data'] as List<dynamic>;
