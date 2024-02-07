@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/styles.dart';
 
+import '../../../domain/entities/entities.dart';
+import '../../blocs/blocs.dart';
 import '../../widgets/text_input.dart';
 import 'widgets/add_alert_widgets.dart';
 
@@ -12,8 +15,14 @@ class AddAlertScreen extends StatefulWidget {
 }
 
 class _AddAlertScreenState extends State<AddAlertScreen> {
+  final TextEditingController _priceController = TextEditingController();
+
+  String? _selectedStock;
+
   @override
   Widget build(BuildContext context) {
+    final alertBloc = context.read<AlertBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,11 +35,16 @@ class _AddAlertScreenState extends State<AddAlertScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const StocksDropdownWidget(),
+            StocksDropdownWidget(
+              onStockSelected: (stock) {
+                _selectedStock = stock;
+              },
+            ),
             const SizedBox(height: 16),
-            const TextInput(
+            TextInput(
               labelText: "Price Alert",
               keyboardType: TextInputType.number,
+              controller: _priceController,
             ),
             const SizedBox(height: 8),
             Text(
@@ -41,7 +55,7 @@ class _AddAlertScreenState extends State<AddAlertScreen> {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => _performAddAlert(alertBloc),
                 child: Text(
                   "Add Alert",
                   style: Styles.subtitleTwo(),
@@ -52,6 +66,89 @@ class _AddAlertScreenState extends State<AddAlertScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  _performAddAlert(AlertBloc alertBloc) async {
+    if (_selectedStock == null) {
+      ScaffoldMessenger.of(context).showMaterialBanner(
+        MaterialBanner(
+          content: Text(
+            "Stock Symbol is required",
+            style: Styles.subtitleTwo(),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+              },
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    if (_priceController.text.isEmpty || _priceController.text == "0") {
+      ScaffoldMessenger.of(context).showMaterialBanner(
+        MaterialBanner(
+          content: Text(
+            "Price Alert is required and cannot be 0",
+            style: Styles.subtitleTwo(),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+              },
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    final price = double.tryParse(_priceController.text);
+    if (price == null) {
+      ScaffoldMessenger.of(context).showMaterialBanner(
+        MaterialBanner(
+          content: Text(
+            "Price Alert must be a valid number",
+            style: Styles.subtitleTwo(),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+              },
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    final alert = Alert(
+      stockSymbol: _selectedStock!,
+      alertPrice: price,
+    );
+
+    alertBloc.addAlert(alert).then(
+      (_) {
+        Navigator.pop(context);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Alert added successfully",
+              style: Styles.subtitleTwo(),
+            ),
+          ),
+        );
+      },
     );
   }
 }

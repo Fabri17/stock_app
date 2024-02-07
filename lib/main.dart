@@ -20,6 +20,7 @@ class BlocsProviders extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt<ThemeCubit>()),
         BlocProvider(create: (context) => getIt<StocksBloc>()),
+        BlocProvider(create: (context) => getIt<AlertBloc>()),
       ],
       child: const MyApp(),
     );

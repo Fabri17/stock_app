@@ -4,7 +4,12 @@ import 'package:stock_app/presentation/widgets/text_input.dart';
 import 'add_alert_widgets.dart';
 
 class StocksDropdownWidget extends StatefulWidget {
-  const StocksDropdownWidget({super.key});
+  const StocksDropdownWidget({
+    super.key,
+    required this.onStockSelected,
+  });
+
+  final Function(String?) onStockSelected;
 
   @override
   State<StocksDropdownWidget> createState() => _StocksDropdownWidgetState();
@@ -34,6 +39,7 @@ class _StocksDropdownWidgetState extends State<StocksDropdownWidget> {
         return SelectStockDialog(
           onStockSelected: (stock) {
             _stockController.text = stock ?? '';
+            widget.onStockSelected(stock);
             Navigator.pop(context);
           },
         );

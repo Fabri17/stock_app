@@ -20,8 +20,5 @@ class Stock extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        description,
-        symbol,
-      ];
+  List<Object?> get props => [description, symbol];
 }
