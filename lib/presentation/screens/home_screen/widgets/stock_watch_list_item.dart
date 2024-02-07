@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/colors.dart';
-import '../../../../data/models/stock.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/utils/utils.dart';
+import '../../../../domain/entities/alert.dart';
 
 class StockWatchListItem extends StatelessWidget {
-  const StockWatchListItem({super.key, required this.stock});
+  const StockWatchListItem({super.key, required this.alert});
 
-  final Stock stock;
+  final Alert alert;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,33 @@ class StockWatchListItem extends StatelessWidget {
           ),
         ),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [],
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  alert.stockSymbol,
+                  style: Styles.subtitleOne(),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "Alert Price: ${Formatters.currency(alert.alertPrice)}",
+                  style: Styles.subtitleTwo(),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            alert.lastPrice == 0
+                ? "Loading..."
+                : Formatters.currency(alert.lastPrice),
+            style: Styles.subtitleOne(),
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stock_app/core/constants/constants.dart';
+import '../../../../core/constants/constants.dart';
 
 import '../../../blocs/blocs.dart';
 
@@ -12,6 +12,7 @@ class SelectStockDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stocksBloc = context.watch<StocksBloc>();
+    final alertBloc = context.read<AlertBloc>();
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.5,
@@ -61,18 +62,21 @@ class SelectStockDialog extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: stocksBloc.state.stocks.length,
                   itemBuilder: (context, index) {
+                    final stock = stocksBloc.state.stocks[index];
                     return ListTile(
                       title: Text(
-                        stocksBloc.state.stocks[index].symbol ?? '',
+                        stock.symbol ?? '',
                         style: Styles.heading6(),
                       ),
                       subtitle: Text(
-                        stocksBloc.state.stocks[index].description ?? '',
+                        stock.description ?? '',
                         style: Styles.paragraphTwo(),
                       ),
                       onTap: () => onStockSelected(
-                        stocksBloc.state.stocks[index].symbol,
+                        stock.symbol,
                       ),
+                      enabled: alertBloc.state.alerts
+                          .every((alert) => alert.stockSymbol != stock.symbol),
                     );
                   },
                 ),

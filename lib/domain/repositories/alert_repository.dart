@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../domain/entities/alert.dart';
 
 class AlertRepository {
@@ -27,6 +29,7 @@ class AlertRepository {
             (alertJson) => Alert(
               stockSymbol: json.decode(alertJson)['stockSymbol'],
               alertPrice: json.decode(alertJson)['alertPrice'],
+              lastPrice: json.decode(alertJson)['lastPrice'],
             ),
           )
           .toList();

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stock_app/data/models/stock.dart';
+import '../../../data/models/stock.dart';
 
 part 'stocks_event.dart';
 part 'stocks_state.dart';

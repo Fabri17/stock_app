@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class Trade extends Equatable {
-  final double? price;
+  final num? price;
   final String? symbol;
   final int? time;
-  final double? volume;
+  final num? volume;
 
   const Trade({this.price, this.symbol, this.time, this.volume});
 
-  copyWith({double? price, String? symbol, int? time, double? volume}) {
+  copyWith({num? price, String? symbol, int? time, num? volume}) {
     return Trade(
       price: price ?? this.price,
       symbol: symbol ?? this.symbol,

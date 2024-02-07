@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:stock_app/core/constants/app_constants.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../domain/services/i_web_socket_service.dart';
 
 class FinnhubWebSocketService implements IWebSocketService {

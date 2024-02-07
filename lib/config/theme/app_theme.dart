@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_app/core/constants/constants.dart';
+import '../../core/constants/constants.dart';
 
 const seedColor = CustomColors.primary;
 

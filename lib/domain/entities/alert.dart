@@ -2,20 +2,24 @@ import 'package:equatable/equatable.dart';
 
 class Alert extends Equatable {
   final String stockSymbol;
-  final double alertPrice;
+  final num alertPrice;
+  final num lastPrice;
 
   const Alert({
     required this.stockSymbol,
     required this.alertPrice,
+    required this.lastPrice,
   });
 
-  copyWith({
+  Alert copyWith({
     String? stockSymbol,
-    double? alertPrice,
+    num? alertPrice,
+    num? lastPrice,
   }) {
     return Alert(
       stockSymbol: stockSymbol ?? this.stockSymbol,
       alertPrice: alertPrice ?? this.alertPrice,
+      lastPrice: lastPrice ?? this.lastPrice,
     );
   }
 
@@ -23,9 +27,10 @@ class Alert extends Equatable {
     return {
       'stockSymbol': stockSymbol,
       'alertPrice': alertPrice,
+      'lastPrice': lastPrice,
     };
   }
 
   @override
-  List<Object?> get props => [stockSymbol, alertPrice];
+  List<Object?> get props => [stockSymbol, alertPrice, lastPrice];
 }

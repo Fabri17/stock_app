@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
-import 'package:stock_app/data/repositories/stock_repository.dart';
-import 'package:stock_app/domain/repositories/alert_repository.dart';
+import '../../data/repositories/stock_repository.dart';
+import '../../data/services/finnhub_web_socket_service.dart';
+import '../../domain/repositories/alert_repository.dart';
 
 import 'blocs.dart';
 
@@ -15,5 +16,10 @@ void serviceLocatorInit() {
     ),
   );
 
-  getIt.registerSingleton(AlertBloc(alertRepository: AlertRepository()));
+  getIt.registerSingleton(
+    AlertBloc(
+      alertRepository: AlertRepository(),
+      webSocketService: FinnhubWebSocketService(),
+    ),
+  );
 }

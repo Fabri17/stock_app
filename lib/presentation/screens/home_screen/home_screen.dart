@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stock_app/presentation/blocs/theme_cubit/theme_cubit.dart';
+import '../../blocs/theme_cubit/theme_cubit.dart';
 
 import 'widgets/home_widgets.dart';
 
@@ -13,12 +13,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: ListView(
-          children: const [
-            HomeHeader(),
-            SizedBox(height: 24),
-            StockWatchList(),
-          ],
+        child: SafeArea(
+          child: ListView(
+            children: const [
+              HomeHeader(),
+              SizedBox(height: 24),
+              StockWatchList(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

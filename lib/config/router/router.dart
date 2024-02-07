@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../presentation/screens/home_screen/home_screen.dart';
-import '../../presentation/screens/splash_screen/splash_screen.dart';
 
 import '../../presentation/screens/add_alert_screen/add_alert_screen.dart';
+import '../../presentation/screens/home_screen/home_screen.dart';
+import '../../presentation/screens/splash_screen/splash_screen.dart';
 
 class Router {
   final router = GoRouter(

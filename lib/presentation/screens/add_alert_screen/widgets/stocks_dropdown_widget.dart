@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_app/presentation/widgets/text_input.dart';
+import '../../../widgets/text_input.dart';
 
 import 'add_alert_widgets.dart';
 

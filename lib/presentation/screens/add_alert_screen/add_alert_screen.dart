@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/constants/styles.dart';
 
+import '../../../core/constants/styles.dart';
 import '../../../domain/entities/entities.dart';
 import '../../blocs/blocs.dart';
 import '../../widgets/text_input.dart';
@@ -134,6 +134,7 @@ class _AddAlertScreenState extends State<AddAlertScreen> {
     final alert = Alert(
       stockSymbol: _selectedStock!,
       alertPrice: price,
+      lastPrice: 0,
     );
 
     alertBloc.addAlert(alert).then(
